@@ -6,7 +6,7 @@
 ### Docker-compose
 Для запуска проекта нужно в корневую папку проекта и запустить:
 ```commandline
-docker-compose build
+docker-compose up
 ```
 
 ### Требования
