@@ -3,20 +3,14 @@ FROM python:3.12
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-WORKDIR /app
-
-COPY requirements/prod.txt .
+COPY requirements.txt .
 
 RUN pip install --upgrade pip && \
-    pip install --no-cache-dir -r prod.txt
+    pip install --no-cache-dir -r requirements.txt
 
-RUN useradd -m -r appuser && \
-    chown -R appuser /app
 
-COPY --chown=appuser:appuser . .
+COPY /projectapp /app
 
-USER appuser
-
-WORKDIR /app/projectapp/
+WORKDIR /app
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
