@@ -12,18 +12,6 @@ docker-compose up
 ### Требования
 Для корректной работы проекта необходимо установить зависимости:
 
-1. Установить продакшн зависимости:
-   ```commandline
-   pip install -r requirements/prod.txt
-   ```
-2. Установить тестовые зависимости:
-    ```commandline
-    pip install -r requirements/test.txt
-    ```
-3. Установить зависимости для разработки:
-    ```commandline
-    pip install -r requirements/dev.txt
-    ```
 Если вы хотите установить все зависимости одной командой, просто используйте:
 ```commandline
 pip install -r requirements/requirements.txt
