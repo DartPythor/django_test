@@ -14,7 +14,7 @@ docker-compose up
 
 Если вы хотите установить все зависимости одной командой, просто используйте:
 ```commandline
-pip install -r requirements/requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Контакты
