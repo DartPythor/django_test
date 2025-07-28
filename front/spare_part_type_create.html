@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Создание типа запчасти</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body class="bg-light">
+<nav class="bg-white border-bottom mb-4 py-3">
+    <div class="container d-flex justify-content-start">
+        <div class="btn-group me-2">
+            <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Техника</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Создать тип</a></li>
+                <li><a class="dropdown-item" href="#">Список типов</a></li>
+                <li><a class="dropdown-item" href="#">Создать технику</a></li>
+                <li><a class="dropdown-item" href="#">Список техники</a></li>
+            </ul>
+        </div>
+        <div class="btn-group me-2">
+            <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Запчасти</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Создать тип</a></li>
+                <li><a class="dropdown-item" href="#">Список типов</a></li>
+                <li><a class="dropdown-item" href="#">Создать запчасть</a></li>
+                <li><a class="dropdown-item" href="#">Список запчастей</a></li>
+            </ul>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Атрибуты</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Создать атрибут</a></li>
+                <li><a class="dropdown-item" href="#">Список атрибутов</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <h2 class="mb-4">Создание типа запчасти</h2>
+    <form id="techTypeForm">
+        <div class="mb-3">
+            <label for="techTypeName" class="form-label">Название типа</label>
+            <input type="text" class="form-control" id="techTypeName" name="techTypeName"
+                   placeholder="Например, Фильтр" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/scripts.js"></script>
+</body>
+</html>

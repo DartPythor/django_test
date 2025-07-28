@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Редактирование техники</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/styles.css"/>
+</head>
+
+<body class="bg-light">
+<nav class="bg-white border-bottom mb-4 py-3">
+    <div class="container d-flex justify-content-start">
+        <div class="btn-group me-2">
+            <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Техника</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Создать тип</a></li>
+                <li><a class="dropdown-item" href="#">Список типов</a></li>
+                <li><a class="dropdown-item" href="#">Создать технику</a></li>
+                <li><a class="dropdown-item" href="#">Список техники</a></li>
+            </ul>
+        </div>
+        <div class="btn-group me-2">
+            <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Запчасти</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Создать тип</a></li>
+                <li><a class="dropdown-item" href="#">Список типов</a></li>
+                <li><a class="dropdown-item" href="#">Создать запчасть</a></li>
+                <li><a class="dropdown-item" href="#">Список запчастей</a></li>
+            </ul>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Атрибуты</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Создать атрибут</a></li>
+                <li><a class="dropdown-item" href="#">Список атрибутов</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h2 class="mb-4">Редактирование техники</h2>
+
+    <form>
+        <div class="mb-3">
+            <label for="regNumber" class="form-label">Регистрационный номер</label>
+            <input type="text" class="form-control" id="regNumber" value="A123BC">
+        </div>
+
+        <div class="mb-3">
+            <label for="brand" class="form-label">Бренд</label>
+            <input type="text" class="form-control" id="brand" value="УРАЛ">
+        </div>
+
+        <div class="mb-3">
+            <label for="purchaseDate" class="form-label">Дата покупки</label>
+            <input type="date" class="form-control" id="purchaseDate" value="2023-05-10">
+        </div>
+
+        <div class="mb-3">
+            <label for="equipmentType" class="form-label">Тип техники</label>
+            <select class="form-select" id="equipmentType">
+                <option selected>Трактор</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="mileage" class="form-label">Пробег (км)</label>
+            <input type="text" class="form-control" id="mileage" value="1500,0">
+        </div>
+
+        <div class="mb-3">
+            <label for="status" class="form-label">Статус эксплуатации</label>
+            <select class="form-select" id="status">
+                <option selected>В работе</option>
+            </select>
+        </div>
+
+        <label class="form-label">Фотографии</label>
+        <div class="image-gallery">
+            <div class="image-item" data-image-name="Фото 1">
+                <img src="https://via.placeholder.com/140x100" alt="Фото 1"/>
+                <div class="delete-icon" tabindex="0" role="button" aria-label="Удалить Фото 1">&times;</div>
+            </div>
+            <div class="image-item" data-image-name="Фото 2">
+                <img src="https://via.placeholder.com/140x100" alt="Фото 2"/>
+                <div class="delete-icon" tabindex="0" role="button" aria-label="Удалить Фото 2">&times;</div>
+            </div>
+            <div class="image-item" data-image-name="Фото 3">
+                <img src="https://via.placeholder.com/140x100" alt="Фото 3"/>
+                <div class="delete-icon" tabindex="0" role="button" aria-label="Удалить Фото 3">&times;</div>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <label for="upload1" class="form-label">Добавить новые фото</label>
+            <input class="form-control" type="file" id="upload1" multiple>
+            <input class="form-control" type="file" id="upload2" multiple>
+            <input class="form-control" type="file" id="upload3" multiple>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    </form>
+</div>
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-sm">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title fw-bold text-dark fs-4">Подтвердите удаление</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+            <div class="modal-body border-0 pt-2">
+                Удалить изображение <strong id="imageToDeleteName">#1</strong>?
+            </div>
+            <div class="modal-footer border-0 pt-2 justify-content-end">
+                <button type="button" class="btn btn-dark btn-sm w-25" id="confirmDeleteBtn">Да</button>
+                <button type="button" class="btn btn-secondary btn-sm me-2 w-25" data-bs-dismiss="modal">Нет</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/scripts.js"></script>
+</body>
+</html>

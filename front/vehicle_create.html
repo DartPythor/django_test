@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Создание техники</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body class="bg-light">
+<nav class="bg-white border-bottom mb-4 py-3">
+    <div class="container d-flex justify-content-start">
+        <div class="container-fluid">
+            <div class="btn-group me-2">
+                <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Техника</button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Создать тип</a></li>
+                    <li><a class="dropdown-item" href="#">Список типов</a></li>
+                    <li><a class="dropdown-item" href="#">Создать технику</a></li>
+                    <li><a class="dropdown-item" href="#">Список техники</a></li>
+                </ul>
+            </div>
+            <div class="btn-group me-2">
+                <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Запчасти</button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Создать тип</a></li>
+                    <li><a class="dropdown-item" href="#">Список типов</a></li>
+                    <li><a class="dropdown-item" href="#">Создать запчасть</a></li>
+                    <li><a class="dropdown-item" href="#">Список запчастей</a></li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Атрибуты</button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Создать атрибут</a></li>
+                    <li><a class="dropdown-item" href="#">Список атрибутов</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h2 class="mb-4">Создание техники</h2>
+    <form id="vehicleForm">
+        <div class="mb-3">
+            <label for="registrationNumber" class="form-label">Регистрационный номер</label>
+            <input type="text" class="form-control" id="registrationNumber" placeholder="A123BC" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="brand" class="form-label">Бренд</label>
+            <input type="text" class="form-control" id="brand" placeholder="УРАЛ" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="purchaseDate" class="form-label">Дата покупки</label>
+            <input type="date" class="form-control" id="purchaseDate" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="type" class="form-label">Тип техники</label>
+            <select id="type" class="form-select simple-select" required>
+                <option selected disabled>Выберите тип...</option>
+                <option>Трактор</option>
+                <option>Комбайн</option>
+                <option>Погрузчик</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="mileage" class="form-label">Пробег (км)</label>
+            <input type="number" class="form-control" id="mileage" value="0" min="0">
+        </div>
+
+        <div class="mb-3">
+            <label for="status" class="form-label">Статус эксплуатации</label>
+            <select id="status" class="form-select simple-select">
+                <option>В работе</option>
+                <option>Простой</option>
+                <option>Ремонт</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Фотографии</label>
+            <input type="file" class="form-control mb-2" name="photo1">
+            <input type="file" class="form-control mb-2" name="photo2">
+            <input type="file" class="form-control mb-2" name="photo3">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/scripts.js"></script>
+</body>
+</html>
