@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Редактирование запчасти</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+
+<nav class="bg-white border-bottom mb-4 py-3">
+    <div class="container d-flex justify-content-start">
+        <div class="btn-group me-2">
+            <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Техника</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Создать тип</a></li>
+                <li><a class="dropdown-item" href="#">Список типов</a></li>
+                <li><a class="dropdown-item" href="#">Создать технику</a></li>
+                <li><a class="dropdown-item" href="#">Список техники</a></li>
+            </ul>
+        </div>
+        <div class="btn-group me-2">
+            <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Запчасти</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Создать тип</a></li>
+                <li><a class="dropdown-item" href="#">Список типов</a></li>
+                <li><a class="dropdown-item" href="#">Создать запчасть</a></li>
+                <li><a class="dropdown-item" href="#">Список запчастей</a></li>
+            </ul>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Атрибуты</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Создать атрибут</a></li>
+                <li><a class="dropdown-item" href="#">Список атрибутов</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h2 class="mb-4">Редактирование запчасти</h2>
+
+    <form>
+        <div class="mb-3">
+            <label for="partType" class="form-label">Тип запчасти</label>
+            <select class="form-select" id="partType" name="partType">
+                <option value="filter" selected>Фильтр масляный</option>
+                <option value="sparkPlug">Свеча зажигания</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="techAttach" class="form-label">Закрепить за техникой</label>
+            <select class="form-select" id="techAttach" name="techAttach">
+                <option value="ural" selected>УРАЛ А123ВС</option>
+                <option value="kamaz">КАМАЗ Б456ГД</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="status" class="form-label">Статус</label>
+            <select class="form-select" id="status" name="status">
+                <option value="installed" selected>Установлено</option>
+                <option value="stock">На складе</option>
+            </select>
+        </div>
+
+        <h5>Атрибуты</h5>
+        <table class="table table-bordered mt-2 mb-4">
+            <thead class="table-light">
+            <tr>
+                <th style="width: 5%; text-align:center;">Выбрать</th>
+                <th>Название</th>
+                <th>Значение</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="text-center">
+                    <input type="checkbox" id="diameterCheck"/>
+                </td>
+                <td>Диаметр (мм)</td>
+                <td><input type="text" class="form-control form-control-sm" value="50"/></td>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    <input type="checkbox" id="weightCheck"/>
+                </td>
+                <td>Вес (кг)</td>
+                <td><input type="text" class="form-control form-control-sm" value="3.2"/></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <label class="form-label">Фотографии</label>
+        <div class="image-gallery">
+            <div class="image-item" data-image-name="Фото 1">
+                <img src="https://via.placeholder.com/140x100" alt="Фото 1"/>
+                <div class="delete-icon" tabindex="0" role="button" aria-label="Удалить Фото 1">&times;</div>
+            </div>
+            <div class="image-item" data-image-name="Фото 2">
+                <img src="https://via.placeholder.com/140x100" alt="Фото 2"/>
+                <div class="delete-icon" tabindex="0" role="button" aria-label="Удалить Фото 2">&times;</div>
+            </div>
+            <div class="image-item" data-image-name="Фото 3">
+                <img src="https://via.placeholder.com/140x100" alt="Фото 3"/>
+                <div class="delete-icon" tabindex="0" role="button" aria-label="Удалить Фото 3">&times;</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="upload1" class="form-label">Добавить новые фото</label>
+            <input class="form-control" type="file" id="upload1" multiple/>
+            <input class="form-control" type="file" id="upload2" multiple/>
+            <input class="form-control" type="file" id="upload3" multiple/>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    </form>
+</div>
+
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-sm">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title fw-bold text-dark fs-4" id="confirmDeleteModalLabel">Подтвердите удаление</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+            <div class="modal-body border-0 pt-2">
+                Удалить изображение <strong id="imageToDeleteName">#1</strong>?
+            </div>
+            <div class="modal-footer border-0 pt-2 justify-content-end">
+                <button type="button" class="btn btn-dark btn-sm w-25" id="confirmDeleteBtn">Да</button>
+                <button type="button" class="btn btn-secondary btn-sm me-2 w-25" data-bs-dismiss="modal">Нет</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="js/scripts.js"></script>
+</body>
+</html>

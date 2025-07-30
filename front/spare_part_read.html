@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Карточка запчасти</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body class="bg-light">
+
+
+<nav class="bg-white border-bottom mb-4 py-3">
+    <div class="container d-flex justify-content-start">
+        <div class="btn-group me-2">
+            <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Техника</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Создать тип</a></li>
+                <li><a class="dropdown-item" href="#">Список типов</a></li>
+                <li><a class="dropdown-item" href="#">Создать технику</a></li>
+                <li><a class="dropdown-item" href="#">Список техники</a></li>
+            </ul>
+        </div>
+        <div class="btn-group me-2">
+            <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Запчасти</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Создать тип</a></li>
+                <li><a class="dropdown-item" href="#">Список типов</a></li>
+                <li><a class="dropdown-item" href="#">Создать запчасть</a></li>
+                <li><a class="dropdown-item" href="#">Список запчастей</a></li>
+            </ul>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Атрибуты</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Создать атрибут</a></li>
+                <li><a class="dropdown-item" href="#">Список атрибутов</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h2 class="mb-4">Информация о запчасти</h2>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="mb-2"><strong>Тип запчасти:</strong> Фильтр масляный</div>
+            <div class="mb-2"><strong>Техника:</strong> УРАЛ А123ВС</div>
+            <div class="mb-2"><strong>Статус:</strong> Установлено</div>
+            <div class="mb-2"><strong>Создано:</strong> 2025-07-18 13:05</div>
+            <div class="mb-2"><strong>Обновлено:</strong> 2025-07-19 14:20</div>
+            <div class="mb-2"><strong>Удалено:</strong> <i class="fas fa-times text-purple"></i></div>
+        </div>
+    </div>
+
+    <h4 class="mb-3">Атрибуты</h4>
+    <div class="table-responsive mb-4">
+        <table class="table table-bordered table-hover bg-white">
+            <thead class="table-light">
+            <tr>
+                <th>Название</th>
+                <th>Значение</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Диаметр (мм)</td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td>Вес (кг)</td>
+                <td>3.2</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h4 class="mb-3">Фотографии</h4>
+    <div class="row mb-4">
+        <div class="col-md-4 mb-2">
+            <img src="" alt="Фото 1" class="img-fluid border rounded shadow-sm"
+                 style="height: 180px; object-fit: cover;">
+        </div>
+        <div class="col-md-4 mb-2">
+            <img src="" alt="Фото 2" class="img-fluid border rounded shadow-sm"
+                 style="height: 180px; object-fit: cover;">
+        </div>
+        <div class="col-md-4 mb-2">
+            <img src="" alt="Фото 3" class="img-fluid border rounded shadow-sm"
+                 style="height: 180px; object-fit: cover;">
+        </div>
+    </div>
+
+    <h4 class="mb-3">Лог изменений</h4>
+    <ul class="list-group mb-4">
+        <li class="list-group-item"><b>2025-07-19 14:20</b>: Изменено значение атрибута "Вес" с 3.0 на 3.2</li>
+        <li class="list-group-item"><b>2025-07-18 13:05</b>: Создана запчасть, добавлены фото</li>
+    </ul>
+
+    <a href="#" class="btn btn-secondary">Назад к списку запчастей</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
