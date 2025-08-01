@@ -27,7 +27,15 @@ class VehicleType(IsDeleteCreate):
     name = models.CharField(
         max_length=255,
         help_text="Название типа.",
+        unique=True,
     )
+
+    def __str__(self):
+        return f"Тип техники: {self.name}"
+
+    class Meta:
+        verbose_name = "Тип техники"
+        verbose_name_plural = "Типы техники"
 
 
 class Vehicle(IsDeleteCreate):
@@ -64,11 +72,28 @@ class Vehicle(IsDeleteCreate):
         max_length=6,
     )
 
+    def __str__(self):
+        return f"Техника: {self.brand} - {self.reg_number}"
+
+    class Meta:
+        verbose_name = "Техника"
+        verbose_name_plural = "Техника"
+
 
 class VehicleImage(IsDeleteCreate):
-    file = ImageField(upload_to="vehicle_images/")
+    file = ImageField(
+        upload_to="vehicle_images/",
+        help_text="Загрузка изображения для техники.",
+    )
     vehicle = models.ForeignKey(
         Vehicle,
         related_name="images",
         on_delete=models.CASCADE,
     )
+
+    def __str__(self):
+        return "Изображение техники"
+
+    class Meta:
+        verbose_name = "Изображение техники"
+        verbose_name_plural = "Изображения техники"
