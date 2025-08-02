@@ -1,4 +1,4 @@
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 from django.urls import reverse_lazy, reverse
 from vehicle.models import VehicleType
@@ -24,3 +24,8 @@ class VehicleTypeListView(ListView):
     template_name = "vehicle/vehicletype_list.html"
     paginate_by = 15
     model = VehicleType
+
+
+class VehicleTypeDeleteView(DeleteView):
+    model = VehicleType
+    success_url = reverse_lazy("vehicle:vehicle_type_list")
