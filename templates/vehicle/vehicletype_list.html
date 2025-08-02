@@ -24,7 +24,7 @@
             <td>{{ vehicletype.created_at|date:"Y-m-d" }}</td>
             <td>{{ vehicletype.updated_at|date:"Y-m-d" }}</td>
             <td>
-                {% if vehicletype.deleted %}
+                {% if vehicletype.is_deleted %}
                     <span class="fw-bold text-purple" style="font-size: 1.2rem;">✔️</span>
                 {% else %}
                     <span class="fw-bold text-purple" style="font-size: 1.2rem;">×</span>
@@ -32,7 +32,7 @@
             </td>
             <td>
                 <a href="{% url 'vehicle:vehicle_type_read_update' vehicletype.id %}" class="btn btn-secondary btn-sm">Открыть</a>
-                {% if not vehicletype.deleted %}
+                {% if not vehicletype.is_deleted %}
                 <button class="btn btn-danger btn-sm"
                         data-bs-toggle="modal"
                         data-bs-target="#confirmDeleteModal"

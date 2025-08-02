@@ -1,7 +1,9 @@
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
 from vehicle.models import VehicleType
+
 
 class VehicleTypeCreateView(CreateView):
     template_name = "vehicle/vehicletype_form.html"
@@ -29,3 +31,10 @@ class VehicleTypeListView(ListView):
 class VehicleTypeDeleteView(DeleteView):
     model = VehicleType
     success_url = reverse_lazy("vehicle:vehicle_type_list")
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.object.is_deleted = True
+        self.object.save()
+        return HttpResponseRedirect(success_url)
