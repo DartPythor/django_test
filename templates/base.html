@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Создание типа техники</title>
+    <link href="{% static 'boostrap/css/bootstrap.min.css' %}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
+</head>
+<body class="bg-light">
+<nav class="bg-white border-bottom mb-4 py-3">
+    <div class="container d-flex justify-content-start">
+        <div class="btn-group me-2">
+            <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Техника</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Создать тип</a></li>
+                <li><a class="dropdown-item" href="#">Список типов</a></li>
+                <li><a class="dropdown-item" href="#">Создать технику</a></li>
+                <li><a class="dropdown-item" href="#">Список техники</a></li>
+            </ul>
+        </div>
+        <div class="btn-group me-2">
+            <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Запчасти</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Создать тип</a></li>
+                <li><a class="dropdown-item" href="#">Список типов</a></li>
+                <li><a class="dropdown-item" href="#">Создать запчасть</a></li>
+                <li><a class="dropdown-item" href="#">Список запчастей</a></li>
+            </ul>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Атрибуты</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Создать атрибут</a></li>
+                <li><a class="dropdown-item" href="#">Список атрибутов</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% block content %}
+{% endblock %}
+
+<script src="{% static 'boostrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Создание типа техники</h2>
+    <form id="techTypeForm">
+        <div class="mb-3">
+            <label for="techTypeName" class="form-label">Название типа</label>
+            <input type="text" class="form-control" id="techTypeName" name="techTypeName"
+                   placeholder="Например, Трактор" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+</div>
+{% endblock %}
