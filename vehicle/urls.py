@@ -1,6 +1,10 @@
 from django.urls import path
 
-from vehicle.views import VehicleTypeCreateView, VehicleTypeUpdateView
+from vehicle.views import (
+    VehicleTypeCreateView,
+    VehicleTypeUpdateView,
+    VehicleTypeListView,
+)
 
 app_name = "vehicle"
 urlpatterns = [
@@ -13,5 +17,10 @@ urlpatterns = [
         "vehicle-types/<int:pk>",
         VehicleTypeUpdateView.as_view(),
         name="vehicle_type_read_update",
+    ),
+    path(
+        "vehicle-types",
+        VehicleTypeListView.as_view(),
+        name="vehicle_type_list",
     ),
 ]

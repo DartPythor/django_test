@@ -1,4 +1,5 @@
 from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.list import ListView
 from django.urls import reverse_lazy, reverse
 from vehicle.models import VehicleType
 
@@ -17,3 +18,9 @@ class VehicleTypeUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse("vehicle:vehicle_type_read_update", args=(self.object.pk,))
+
+
+class VehicleTypeListView(ListView):
+    template_name = "vehicle/vehicletype_list.html"
+    paginate_by = 15
+    model = VehicleType
