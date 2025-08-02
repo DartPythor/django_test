@@ -3,12 +3,27 @@
 {% block content %}
 <div class="container">
     <h2 class="mb-4">Создание типа техники</h2>
-    <form id="techTypeForm">
+    <form method="post" id="techTypeForm">
+        {% csrf_token %}
+
         <div class="mb-3">
-            <label for="techTypeName" class="form-label">Название типа</label>
-            <input type="text" class="form-control" id="techTypeName" name="techTypeName"
-                   placeholder="Например, Трактор" required>
+            {{ form.name.label_tag }}
+
+            <input type="text"
+                   class="form-control"
+                   id="techTypeName"
+                   name="{{ form.name.name }}"
+                   placeholder="Например, Трактор"
+                   value="{{ form.name.value|default:'' }}"
+                   required>
+
+            {% if form.name.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.name.errors }}
+                </div>
+            {% endif %}
         </div>
+
         <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>
 </div>
