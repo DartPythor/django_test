@@ -15,7 +15,7 @@
             <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Техника</button>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{% url 'vehicle:vehicle_type_create' %}">Создать тип</a></li>
-                <li><a class="dropdown-item" href="#">Список типов</a></li>
+                <li><a class="dropdown-item" href="{% url 'vehicle:vehicle_type_list' %}">Список типов</a></li>
                 <li><a class="dropdown-item" href="#">Создать технику</a></li>
                 <li><a class="dropdown-item" href="#">Список техники</a></li>
             </ul>
