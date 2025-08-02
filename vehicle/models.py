@@ -69,7 +69,7 @@ class Vehicle(IsDeleteCreate):
     )
     operation_status = models.CharField(
         choices=OPERATIONS_STATUS_CHOICES,
-        max_length=6,
+        max_length=7,
     )
 
     def __str__(self):
