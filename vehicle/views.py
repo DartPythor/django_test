@@ -1,3 +1,4 @@
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 from django.http import HttpResponseRedirect
@@ -5,6 +6,15 @@ from django.urls import reverse_lazy, reverse
 
 from vehicle.forms import VehicleForm
 from vehicle.models import Vehicle, VehicleImage, VehicleType
+
+
+class SoftDeleteView(DeleteView):
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.object.is_deleted = True
+        self.object.save()
+        return HttpResponseRedirect(success_url)
 
 
 class VehicleTypeCreateView(CreateView):
@@ -29,23 +39,16 @@ class VehicleTypeListView(ListView):
     model = VehicleType
 
 
-class VehicleTypeDeleteView(DeleteView):
+class VehicleTypeDeleteView(SoftDeleteView):
     model = VehicleType
     success_url = reverse_lazy("vehicle:vehicle_type_list")
-
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        success_url = self.get_success_url()
-        self.object.is_deleted = True
-        self.object.save()
-        return HttpResponseRedirect(success_url)
 
 
 class VehicleCreateView(CreateView):
     model = Vehicle
     form_class = VehicleForm
     template_name = "vehicle/vehicle_form.html"
-    success_url = reverse_lazy("vehicle:vehicle_type_list")
+    success_url = reverse_lazy("vehicle:vehicle_list")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -90,3 +93,19 @@ class VehicleUpdateView(UpdateView):
             ).delete()
 
         return super().form_valid(form)
+
+
+class VehicleListView(ListView):
+    template_name = "vehicle/vehicle_list.html"
+    paginate_by = 15
+    model = Vehicle
+
+
+class VehicleDeleteView(SoftDeleteView):
+    model = Vehicle
+    success_url = reverse_lazy("vehicle:vehicle_list")
+
+
+class VehicleDetailView(DetailView):
+    model = Vehicle
+    template_name = "vehicle/vehicle_detail.html"

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+{% load thumbnail %}
+
+{% block content %}
+<nav class="bg-white border-bottom mb-4 py-3">
+    <div class="container d-flex justify-content-start">
+        <!-- Навигационные кнопки остаются без изменений -->
+    </div>
+</nav>
+
+<div class="container">
+    <h2 class="mb-4">Информация о технике</h2>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="mb-2"><strong>Регистрационный номер:</strong> {{ vehicle.reg_number }}</div>
+            <div class="mb-2"><strong>Бренд:</strong> {{ vehicle.brand }}</div>
+            <div class="mb-2"><strong>Дата покупки:</strong> {{ vehicle.date_purchase|date:"Y-m-d" }}</div>
+            <div class="mb-2"><strong>Тип техники:</strong> {{ vehicle.type.name }}</div>
+            <div class="mb-2"><strong>Пробег:</strong> {{ vehicle.mileage }} км</div>
+            <div class="mb-2"><strong>Статус эксплуатации:</strong> {{ vehicle.get_operation_status_display }}</div>
+            <div class="mb-2"><strong>Создано:</strong> {{ vehicle.created_at|date:"Y-m-d" }}</div>
+            <div class="mb-2"><strong>Обновлено:</strong> {{ vehicle.updated_at|date:"Y-m-d" }}</div>
+            <div class="mb-2">
+                <strong>Удалено:</strong>
+                {% if vehicle.is_deleted %}
+                    <i class="fas fa-check text-purple"></i>
+                {% else %}
+                    <i class="fas fa-times text-purple"></i>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mb-3">Фотографии</h4>
+    <div class="row mb-4">
+        {% for photo in object.images.all %}
+        <div class="col-md-4 mb-2">
+            {% thumbnail photo.file "350x180" crop="center" as im %}
+            <img src="{{ im.url }}" alt="Фото {{ forloop.counter }}"
+                 class="img-fluid border rounded shadow-sm"
+                 style="height: 180px; object-fit: cover;">
+            {% endthumbnail %}
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p>Нет фотографий</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <a href="{% url 'vehicle:vehicle_list' %}" class="btn btn-secondary">
+        Назад к списку техники
+    </a>
+</div>
+{% endblock %}
