@@ -4,7 +4,9 @@ from vehicle.views import (
     VehicleTypeCreateView,
     VehicleTypeUpdateView,
     VehicleTypeListView,
-VehicleTypeDeleteView,
+    VehicleTypeDeleteView,
+    VehicleCreateView,
+    VehicleUpdateView,
 )
 
 app_name = "vehicle"
@@ -28,5 +30,15 @@ urlpatterns = [
         "vehicle-types/<int:pk>/delete",
         VehicleTypeDeleteView.as_view(),
         name="vehicle_type_delete",
+    ),
+    path(
+        "vehicles/create",
+        VehicleCreateView.as_view(),
+        name="vehicle_create",
+    ),
+    path(
+        "vehicles/<int:pk>/edit",
+        VehicleUpdateView.as_view(),
+        name="vehicle_update",
     ),
 ]
