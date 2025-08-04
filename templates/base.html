@@ -16,8 +16,8 @@
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{% url 'vehicle:vehicle_type_create' %}">Создать тип</a></li>
                 <li><a class="dropdown-item" href="{% url 'vehicle:vehicle_type_list' %}">Список типов</a></li>
-                <li><a class="dropdown-item" href="#">Создать технику</a></li>
-                <li><a class="dropdown-item" href="#">Список техники</a></li>
+                <li><a class="dropdown-item" href="{% url 'vehicle:vehicle_create' %}">Создать технику</a></li>
+                <li><a class="dropdown-item" href="{% url 'vehicle:vehicle_list' %}">Список техники</a></li>
             </ul>
         </div>
         <div class="btn-group me-2">
