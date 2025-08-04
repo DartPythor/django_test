@@ -3,12 +3,6 @@
 {% load thumbnail %}
 
 {% block content %}
-<nav class="bg-white border-bottom mb-4 py-3">
-    <div class="container d-flex justify-content-start">
-        <!-- Навигационные кнопки остаются без изменений -->
-    </div>
-</nav>
-
 <div class="container">
     <h2 class="mb-4">Информация о технике</h2>
 
@@ -25,9 +19,9 @@
             <div class="mb-2">
                 <strong>Удалено:</strong>
                 {% if vehicle.is_deleted %}
-                    <i class="fas fa-check text-purple"></i>
+                    <span class="fw-bold text-purple" style="font-size: 1.2rem;">✔️</span>
                 {% else %}
-                    <i class="fas fa-times text-purple"></i>
+                    <span class="fw-bold text-purple" style="font-size: 1.2rem;">×</span>
                 {% endif %}
             </div>
         </div>
