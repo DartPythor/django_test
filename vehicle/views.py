@@ -24,6 +24,9 @@ class VehicleTypeCreateView(CreateView):
     fields = ["name"]
     success_url = reverse_lazy("vehicle:vehicle_type_create")
 
+    def get_success_url(self):
+        return reverse("vehicle:vehicle_type_read_update", args=(self.object.pk,))
+
 
 class VehicleTypeUpdateView(UpdateView):
     template_name = "vehicle/vehicletype_form.html"
@@ -95,7 +98,17 @@ class VehicleUpdateView(UpdateView):
                 vehicle=self.object
             ).delete()
 
-        return super().form_valid(form)
+        response = super().form_valid(form)
+
+        all_photo = [
+            self.request.FILES.get("photo1", None),
+            self.request.FILES.get("photo2", None),
+            self.request.FILES.get("photo3", None),
+        ]
+        for photo in filter(lambda x: x is not None, all_photo):
+            VehicleImage.objects.create(vehicle=self.object, file=photo)
+
+        return response
 
 
 class VehicleListView(ListView):
