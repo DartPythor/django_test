@@ -23,6 +23,11 @@ class IsDeleteCreate(models.Model):
         abstract = True
 
 
+class VehicleManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().select_related("type").prefetch_related("images")
+
+
 class VehicleType(IsDeleteCreate):
     name = models.CharField(
         max_length=255,
@@ -44,6 +49,8 @@ class Vehicle(IsDeleteCreate):
         ("unuse", "Простой"),
         ("repair", "Ремонт"),
     ]
+
+    with_images = VehicleManager()
 
     reg_number = models.CharField(
         max_length=255,

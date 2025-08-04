@@ -74,6 +74,7 @@ class VehicleUpdateView(UpdateView):
     model = Vehicle
     form_class = VehicleForm
     template_name = "vehicle/vehicle_form.html"
+    queryset = Vehicle.with_images.all()
 
     def get_success_url(self):
         return reverse("vehicle:vehicle_update", args=(self.object.pk,))
@@ -99,6 +100,7 @@ class VehicleListView(ListView):
     template_name = "vehicle/vehicle_list.html"
     paginate_by = 15
     model = Vehicle
+    queryset = Vehicle.with_images.all()
 
 
 class VehicleDeleteView(SoftDeleteView):
@@ -109,3 +111,4 @@ class VehicleDeleteView(SoftDeleteView):
 class VehicleDetailView(DetailView):
     model = Vehicle
     template_name = "vehicle/vehicle_detail.html"
+    queryset = Vehicle.with_images.all()
