@@ -38,12 +38,15 @@
             </td>
             <td>
                 <a href="{% url 'vehicle:vehicle_detail' vehicle.id %}" class="btn btn-secondary btn-sm">Открыть</a>
+                <a href="{% url 'vehicle:vehicle_update' vehicle.id %}" class="btn btn-info btn-action">Редактировать</a>
                 {% if not vehicle.is_deleted %}
                 <button class="btn btn-danger btn-sm"
                         data-bs-toggle="modal"
                         data-bs-target="#confirmDeleteModal"
                         data-vehicle-id="{{ vehicle.id }}"
-                        data-vehicle-name="{{ vehicle.reg_number }}">
+                        data-vehicle-name="{{ vehicle.reg_number }}"
+                        data-vehicle-url="{% url 'vehicle:vehicle_delete' 0 %}"
+                >
                     Удалить
                 </button>
                 {% endif %}
@@ -117,19 +120,5 @@
         </div>
     </div>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const deleteModal = document.getElementById('confirmDeleteModal');
-
-        deleteModal.addEventListener('show.bs.modal', function(event) {
-            const button = event.relatedTarget;
-            const vehicleId = button.getAttribute('data-vehicle-id');
-            const vehicleName = button.getAttribute('data-vehicle-name');
-
-            document.getElementById('vehicleNameToDelete').textContent = vehicleName;
-            document.getElementById('vehicleIdToDelete').value = vehicleId;
-            document.getElementById('deleteForm').action = "{% url 'vehicle:vehicle_delete' 0 %}".replace('0', vehicleId);
-        });
-    });
-</script>
+<script src="{% static 'js/vehicle_list.js' %}"></script>
 {% endblock %}

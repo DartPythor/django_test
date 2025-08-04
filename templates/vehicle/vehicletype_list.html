@@ -37,7 +37,9 @@
                         data-bs-toggle="modal"
                         data-bs-target="#confirmDeleteModal"
                         data-type-id="{{ vehicletype.id }}"
-                        data-type-name="{{ vehicletype.name }}">
+                        data-type-name="{{ vehicletype.name }}"
+                        data-vehicle-url="{% url 'vehicle:vehicle_type_delete' 0 %}"
+                >
                     Удалить
                 </button>
                 {% endif %}
@@ -111,19 +113,5 @@
         </div>
     </div>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const deleteModal = document.getElementById('confirmDeleteModal');
-
-        deleteModal.addEventListener('show.bs.modal', function(event) {
-            const button = event.relatedTarget;
-            const typeId = button.getAttribute('data-type-id');
-            const typeName = button.getAttribute('data-type-name');
-
-            document.getElementById('typeNameToDelete').textContent = typeName;
-            document.getElementById('typeIdToDelete').value = typeId;
-            document.getElementById('deleteForm').action = "{% url 'vehicle:vehicle_type_delete' 0 %}".replace('0', typeId);
-        });
-    });
-</script>
+<script src="{% static 'js/vehicle_type_list.js' %}"></script>
 {% endblock %}
