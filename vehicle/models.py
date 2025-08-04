@@ -27,6 +27,15 @@ class VehicleManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().select_related("type").prefetch_related("images")
 
+    def get_active_query(self):
+        return (
+            super()
+            .get_queryset()
+            .select_related("type")
+            .prefetch_related("images")
+            .filter(is_deleted=False)
+        )
+
 
 class VehicleType(IsDeleteCreate):
     name = models.CharField(

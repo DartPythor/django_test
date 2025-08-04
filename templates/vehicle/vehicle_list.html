@@ -4,6 +4,29 @@
 {% block content %}
 <div class="container">
     <h1 class="mb-4">Техника</h1>
+    <form method="get" action="{% url 'vehicle:vehicle_list' %}" class="mb-4">
+    <div class="row">
+        <div class="col-md-8">
+            <label for="brand" class="form-label">Фильтр по бренду</label>
+            <div class="input-group">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="brand"
+                    name="brand"
+                    placeholder="Введите бренд (например, УРАЛ)"
+                    value="{{ current_brand }}"
+                >
+                <button class="btn btn-primary" type="submit">Применить</button>
+                {% if current_brand %}
+                <a href="{% url 'vehicle:vehicle_list' %}" class="btn btn-outline-secondary">
+                    Сбросить
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</form>
 
     <table class="table table-striped">
         <thead>

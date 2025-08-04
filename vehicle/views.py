@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
@@ -37,6 +38,7 @@ class VehicleTypeListView(ListView):
     template_name = "vehicle/vehicletype_list.html"
     paginate_by = 15
     model = VehicleType
+    queryset = VehicleType.objects.filter(is_deleted=False)
 
 
 class VehicleTypeDeleteView(SoftDeleteView):
@@ -100,7 +102,22 @@ class VehicleListView(ListView):
     template_name = "vehicle/vehicle_list.html"
     paginate_by = 15
     model = Vehicle
-    queryset = Vehicle.with_images.all()
+    queryset = Vehicle.with_images.get_active_query()
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        brand_filter = self.request.GET.get('brand', '').strip()
+
+        if brand_filter:
+            brands = [b.strip() for b in brand_filter.split(',') if b.strip()]
+            if brands:
+                q_objects = Q()
+                for brand in brands:
+                    q_objects |= Q(brand__icontains=brand)
+
+                queryset = queryset.filter(q_objects)
+
+        return queryset
 
 
 class VehicleDeleteView(SoftDeleteView):
