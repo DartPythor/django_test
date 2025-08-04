@@ -119,16 +119,10 @@ class VehicleListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        brand_filter = self.request.GET.get('brand', '').strip()
+        brand = self.request.GET.get("brand")
 
-        if brand_filter:
-            brands = [b.strip() for b in brand_filter.split(',') if b.strip()]
-            if brands:
-                q_objects = Q()
-                for brand in brands:
-                    q_objects |= Q(brand__icontains=brand)
-
-                queryset = queryset.filter(q_objects)
+        if brand:
+            return queryset.filter(brand__icontains=brand)
 
         return queryset
 
