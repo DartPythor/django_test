@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load thumbnail %}
+
+{% block title %}
+    {% if form.instance.pk %}
+        Редактирование техники
+    {% else %}
+        Создание техники
+    {% endif %}
+{% endblock %}
+
 {% block content %}
 <div class="container">
-    <h2 class="mb-4">
-        {% if is_update %}Редактирование техники{% else %}Создание техники{% endif %}
-    </h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
@@ -39,7 +45,7 @@
                    class="form-control"
                    id="id_date_purchase"
                    name="{{ form.date_purchase.name }}"
-                   value="{{ form.date_purchase.value }}"
+                   value="{{ form.date_purchase.value|date:'Y-m-d'|default_if_none:'' }}"
                    required>
             <div class="text-danger">{{ form.date_purchase.errors }}</div>
         </div>
@@ -110,28 +116,14 @@
     </div>
     {% endfor %}
 </div>
-
         <div class="mb-3">
-            {{ form.photo1.label_tag }}
+            {{ form.photos.label_tag }}
             <input type="file"
+                   multiple="multiple"
                    class="form-control"
-                   id="id_new_photo1"
-                   name="{{ form.photo1.name }}">
-            <div class="text-danger">{{ form.photo1.errors }}</div>
-        </div>
-        <div class="mb-3">
-            <input type="file"
-                   class="form-control"
-                   id="id_new_photo2"
-                   name="{{ form.photo2.name }}">
-            <div class="text-danger">{{ form.photo2.errors }}</div>
-        </div>
-        <div class="mb-3">
-            <input type="file"
-                   class="form-control"
-                   id="id_new_photo3"
-                   name="{{ form.photo3.name }}">
-            <div class="text-danger">{{ form.photo3.errors }}</div>
+                   id="id_new_photos"
+                   name="{{ form.photos.name }}">
+            <div class="text-danger">{{ form.photos.errors }}</div>
         </div>
         <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>
