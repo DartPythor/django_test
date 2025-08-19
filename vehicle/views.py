@@ -61,20 +61,14 @@ class VehicleCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["is_update"] = False
         context["existing_photos"] = []
         return context
 
     def form_valid(self, form):
         response = super().form_valid(form)
 
-        all_photo = [
-            self.request.FILES.get("photo1", None),
-            self.request.FILES.get("photo2", None),
-            self.request.FILES.get("photo3", None),
-        ]
         with transaction.atomic():
-            for photo in filter(lambda x: x is not None, all_photo):
+            for photo in self.request.FILES.getlist("photos"):
                 VehicleImage.objects.create(vehicle=self.object, file=photo)
 
         return response
@@ -91,7 +85,6 @@ class VehicleUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["is_update"] = True
         context["existing_photos"] = self.object.images.all()
         return context
 
@@ -100,19 +93,13 @@ class VehicleUpdateView(UpdateView):
 
         response = super().form_valid(form)
 
-        all_photo = [
-            self.request.FILES.get("photo1", None),
-            self.request.FILES.get("photo2", None),
-            self.request.FILES.get("photo3", None),
-        ]
         with transaction.atomic():
             if delete_photos:
                 VehicleImage.objects.filter(
                     id__in=delete_photos,
                     vehicle=self.object
                 ).delete()
-
-            for photo in filter(lambda x: x is not None, all_photo):
+            for photo in self.request.FILES.getlist("photos"):
                 VehicleImage.objects.create(vehicle=self.object, file=photo)
 
         return response

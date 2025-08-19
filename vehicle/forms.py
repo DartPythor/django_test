@@ -3,17 +3,7 @@ from vehicle.models import Vehicle
 
 
 class VehicleForm(forms.ModelForm):
-    photo1 = forms.ImageField(
-        label="Добавить фото",
-        widget=forms.ClearableFileInput(),
-        required=False,
-    )
-    photo2 = forms.ImageField(
-        label="Добавить фото",
-        widget=forms.ClearableFileInput(),
-        required=False,
-    )
-    photo3 = forms.ImageField(
+    photos = forms.ImageField(
         label="Добавить фото",
         widget=forms.ClearableFileInput(),
         required=False,
