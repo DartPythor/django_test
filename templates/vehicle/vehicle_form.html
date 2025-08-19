@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}
+    {% if form.instance.pk %}
+        Редактирование техники
+    {% else %}
+        Создание техники
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            {{ form.reg_number.label_tag }}
+            <input type="text"
+                   class="form-control"
+                   id="id_reg_number"
+                   name="{{ form.reg_number.name }}"
+                   placeholder="Например, Трактор"
+                   value="{{ form.reg_number.value|default:'' }}"
+                   required>
+            <div class="text-danger">{{ form.reg_number.errors }}</div>
+        </div>
+
+        <div class="mb-3">
+            {{ form.brand.label_tag }}
+            <input type="text"
+                   class="form-control"
+                   id="id_brand"
+                   name="{{ form.brand.name }}"
+                   placeholder="Введите марку техники"
+                   value="{{ form.brand.value|default:'' }}"
+                   required>
+            <div class="text-danger">{{ form.brand.errors }}</div>
+        </div>
+
+        <div class="mb-3">
+            {{ form.date_purchase.label_tag }}
+            <input type="date"
+                   class="form-control"
+                   id="id_date_purchase"
+                   name="{{ form.date_purchase.name }}"
+                   value="{{ form.date_purchase.value|date:'Y-m-d'|default_if_none:'' }}"
+                   required>
+            <div class="text-danger">{{ form.date_purchase.errors }}</div>
+        </div>
+
+        <div class="mb-3">
+            {{ form.type.label_tag }}
+            <select class="form-control"
+                    id="id_type"
+                    name="{{ form.type.name }}"
+                    required>
+                {% for value, label in form.type.field.choices %}
+                <option value="{{ value }}"
+                        {% if form.type.value == value %} selected {% endif %}>
+                    {{ label }}
+                </option>
+                {% endfor %}
+            </select>
+            <div class="text-danger">{{ form.type.errors }}</div>
+        </div>
+
+        <div class="mb-3">
+            {{ form.mileage.label_tag }}
+            <input type="number"
+                   class="form-control"
+                   id="id_mileage"
+                   name="{{ form.mileage.name }}"
+                   value="{{ form.mileage.value|default:0 }}"
+                   min="0"
+                   step="0.001">
+            <div class="text-danger">{{ form.mileage.errors }}</div>
+        </div>
+
+        <div class="mb-3">
+            {{ form.operation_status.label_tag }}
+            <select class="form-control"
+                    id="id_operation_status"
+                    name="{{ form.operation_status.name }}">
+                {% for value, label in form.operation_status.field.choices %}
+                <option value="{{ value }}"
+                        {% if form.operation_status.value == value %}selected{% endif %}>
+                    {{ label }}
+                </option>
+                {% endfor %}
+            </select>
+            <div class="text-danger">{{ form.operation_status.errors }}</div>
+        </div>
+
+    <label class="form-label">Фотографии</label>
+<div class="image-gallery row">
+    {% for photo in existing_photos %}
+    <div class="col-md-4 mb-3 position-relative image-item"
+         data-photo-id="{{ photo.id }}">
+        <img {% thumbnail photo.file "350x180" crop="center" as im %}
+             src="{{ im.url }}"
+             alt="Фото {{ forloop.counter }}"
+             class="img-fluid rounded border"/>
+        {% endthumbnail %}
+        <div class="position-absolute top-0 end-0 m-1">
+            <button class="btn btn-sm btn-danger delete-icon"
+                    data-photo-id="{{ photo.id }}"
+                    data-photo-name="Фото {{ forloop.counter }}">
+                &times;
+            </button>
+        </div>
+        <input type="hidden"
+               name="keep_photos"
+               value="{{ photo.id }}">
+    </div>
+    {% endfor %}
+</div>
+        <div class="mb-3">
+            {{ form.photos.label_tag }}
+            <input type="file"
+                   multiple="multiple"
+                   class="form-control"
+                   id="id_new_photos"
+                   name="{{ form.photos.name }}">
+            <div class="text-danger">{{ form.photos.errors }}</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+
+</div>
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Подтвердите удаление</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Удалить изображение <span id="imageToDeleteName"></span>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Удалить</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="delete-photos-container"></div>
+<script src="{% static 'js/vehicle.js' %}"></script>
+{% endblock %}

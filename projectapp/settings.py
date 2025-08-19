@@ -8,9 +8,9 @@ environ.Env.read_env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = env(
-        "SECRET_KEY",
-        cast=str,
-        default="django-insecure-mdvnoln%ud#8ky7@45nv!&-mlu7qs%zwd)--!$@$fza#2g21sy",
+    "SECRET_KEY",
+    cast=str,
+    default="django-insecure-mdvnoln%ud#8ky7@45nv!&-mlu7qs%zwd)--!$@$fza#2g21sy",
 )
 
 DEBUG = env("DEBUG", cast=bool, default=True)
@@ -24,6 +24,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "vehicle.apps.VehicleConfig",
+    "sorl.thumbnail",
 ]
 
 MIDDLEWARE = [
@@ -41,7 +43,7 @@ ROOT_URLCONF = "projectapp.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -90,5 +92,15 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "static/"
+
+MEDIA_ROOT = BASE_DIR / "media"
+
+MEDIA_URL = "media/"
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

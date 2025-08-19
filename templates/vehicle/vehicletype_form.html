@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Созадние типа техники{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Создание типа техники</h2>
+    <form method="post" id="techTypeForm">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            Имя:
+
+            <input type="text"
+                   class="form-control"
+                   id="techTypeName"
+                   name="{{ form.name.name }}"
+                   placeholder="Например, Трактор"
+                   value="{{ form.name.value|default:'' }}"
+                   required>
+
+            {% if form.name.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.name.errors }}
+                </div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+</div>
+{% endblock %}
